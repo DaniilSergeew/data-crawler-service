@@ -35,11 +35,11 @@ Crawl, состоящего из списка телефонов, получен
 
 Таблица phone
 
-<img src="screenshots/phone.png" width="275">
+<img src="screenshots/phone.png" width="320">
 
 Таблица report
 
-<img src="screenshots/report.png" width="275">
+<img src="screenshots/report.png" width="320">
 
 ### Развитие
 - Можно добавить ресурсы для сбора более глубокой аналитики
