@@ -39,7 +39,7 @@ Crawl, состоящего из списка телефонов, получен
 
 Таблица report
 
-<img src="screenshots/report.png" width="320">
+<img src="screenshots/report.png" width="400" height="30">
 
 Report 
 
