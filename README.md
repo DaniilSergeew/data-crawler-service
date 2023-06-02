@@ -9,7 +9,6 @@ REST-API сервис, который позволяет пользовател�
 - Spring Web
 - Lombok
 - PostgreSQL
-- Swagger (OpenApi 3.0)
 - Docker compose
 - Логирование с помощью slf4j
 - Maven
