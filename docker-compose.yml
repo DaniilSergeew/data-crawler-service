@@ -16,7 +16,7 @@ services:
     image: 'docker-service:latest'
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     depends_on:
       - db
     links:

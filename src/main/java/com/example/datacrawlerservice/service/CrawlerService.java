@@ -48,7 +48,7 @@ public class CrawlerService {
 
     private Crawl getCrawl() {
         List<Phone> data = new ArrayList<>();
-        for (int page = 1; page < 5; page++) {
+        for (int page = 1; page < 12; page++) {
             // Достаем HTML с каждой страницы сайта
             Document document = null;
             try {
