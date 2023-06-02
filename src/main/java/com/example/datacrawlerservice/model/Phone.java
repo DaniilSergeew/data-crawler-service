@@ -28,4 +28,8 @@ public class Phone {
 
     @Column
     private int memory;
+
+    @ManyToOne
+    @JoinColumn(name = "crawl_id")
+    private Crawl crawl;
 }

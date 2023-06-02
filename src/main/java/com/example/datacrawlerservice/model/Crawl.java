@@ -19,7 +19,7 @@ public class Crawl {
     @Column
     private Instant date;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "crawl_id")
     private List<Phone> phones;
 }

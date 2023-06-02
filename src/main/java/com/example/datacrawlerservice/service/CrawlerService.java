@@ -99,34 +99,12 @@ public class CrawlerService {
         return crawl;
     }
 
-    // Todo: это не дело, вроде бы у Евгения Борисова был доклад про что то подобное и паттерн chain if responsibility
     private Brand findBrand(String name) {
-        if (name.contains(Brand.HONOR.toString())) {
-            return Brand.HONOR;
-        } else if (name.contains(Brand.Itel.toString())) {
-            return Brand.Itel;
-        } else if (name.contains(Brand.Apple.toString())) {
-            return Brand.Apple;
-        } else if (name.contains(Brand.HUAWEI.toString())) {
-            return Brand.HUAWEI;
-        } else if (name.contains(Brand.TCL.toString())) {
-            return Brand.TCL;
-        } else if (name.contains(Brand.Poco.toString())) {
-            return Brand.Poco;
-        } else if (name.contains(Brand.realme.toString())) {
-            return Brand.realme;
-        } else if (name.contains(Brand.Samsung.toString())) {
-            return Brand.Samsung;
-        } else if (name.contains(Brand.Xiaomi.toString())) {
-            return Brand.Xiaomi;
-        } else if (name.contains(Brand.Tecno.toString())) {
-            return Brand.Tecno;
-        } else if (name.contains(Brand.Vivo.toString())) {
-            return Brand.Vivo;
-        } else if (name.contains(Brand.Wiko.toString())) {
-            return Brand.Wiko;
-        } else {
-            return Brand.ZTE;
+        for (Brand brand : Brand.values()) {
+            if (name.contains(brand.toString())) {
+                return brand;
+            }
         }
+        return Brand.ZTE;
     }
 }
