@@ -69,10 +69,11 @@ public class CrawlerService {
 
             for (int i = 0; i < titles.size(); i++) {
                 String title = titlesIterator.next().text();
+                Brand brand = findBrand(title);
                 String model = title
                         .replaceAll("\\d+GB.*", "")
                         .replace("Смартфон ", "")
-                        .replace(findBrand(title) + " ", "")
+                        .replace(brand + " ", "")
                         .replace("/", "");
                 Pattern pattern = Pattern.compile("\\b(\\d+)GB\\b");
                 Matcher matcher = pattern.matcher(title);
@@ -84,7 +85,7 @@ public class CrawlerService {
                 int price = Integer.parseInt(pricesIterator.next().text().replace(" ", ""));
                 boolean inStock = inStocksIterator.next().text().contains("Есть самовывозом, сегодня");
                 Phone phone = Phone.builder()
-                        .brand(findBrand(title))
+                        .brand(brand)
                         .model(model)
                         .memory(memory)
                         .price(price)
