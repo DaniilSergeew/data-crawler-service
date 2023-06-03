@@ -72,7 +72,8 @@ public class CrawlerService {
                 String model = title
                         .replaceAll("\\d+GB.*", "")
                         .replace("Смартфон ", "")
-                        .replace(findBrand(title) + " ", "");
+                        .replace(findBrand(title) + " ", "")
+                        .replace("/", "");
                 Pattern pattern = Pattern.compile("\\b(\\d+)GB\\b");
                 Matcher matcher = pattern.matcher(title);
                 int memory = 0;
