@@ -4,9 +4,9 @@ REST-API сервис, который позволяет пользовател�
 ### Стек технологий
 - Java 17
 - Spring Boot
-- Jsoup
-- Spring Data JPA
 - Spring Web
+- Hibernate
+- Jsoup
 - Lombok
 - PostgreSQL
 - Docker compose
