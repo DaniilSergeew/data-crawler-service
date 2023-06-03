@@ -37,11 +37,12 @@ public class CrawlerService {
 
     private Report getReport(Crawl crawl) {
         List<Phone> phones = crawl.getPhones();
-        Report report = new Report();
-        report.setAveragePrice((int) phones.stream().mapToInt(Phone::getPrice).average().orElse(0));
-        report.setMaxPrice(phones.stream().mapToInt(Phone::getPrice).max().orElse(0));
-        report.setMinPrice(phones.stream().mapToInt(Phone::getPrice).min().orElse(0));
-        report.setInStockFactor((float) phones.stream().filter(Phone::isInStock).count() / phones.size());
+        Report report = Report.builder()
+                .averagePrice((int) phones.stream().mapToInt(Phone::getPrice).average().orElse(0))
+                .maxPrice(phones.stream().mapToInt(Phone::getPrice).max().orElse(0))
+                .minPrice(phones.stream().mapToInt(Phone::getPrice).min().orElse(0))
+                .inStockFactor((float) phones.stream().filter(Phone::isInStock).count() / phones.size())
+                .build();
         reportRepository.save(report);
         return report;
     }
@@ -57,44 +58,44 @@ public class CrawlerService {
                 throw new RuntimeException(e);
             }
             // Вытаскиваем нужные блоки по классам
-            Elements names = document.getElementsByClass("b-good__title-link");
+            Elements titles = document.getElementsByClass("b-good__title-link");
             Elements prices = document.getElementsByClass("b-price-good-list__value b-price__value");
             Elements inStocks = document.getElementsByClass("b-good-cards__status-item pickup ");
 
             // Для каждого блока создаем итератор и идем сразу тремя итераторами, создавая объекты
-            Iterator<Element> namesIterator = names.iterator();
+            Iterator<Element> titlesIterator = titles.iterator();
             Iterator<Element> pricesIterator = prices.iterator();
             Iterator<Element> inStocksIterator = inStocks.iterator();
 
-            for (int i = 0; i < names.size(); i++) {
-                Phone phone = new Phone();
-                String name = namesIterator.next().text();
-                phone.setBrand(findBrand(name));
-
-                String model = name
+            for (int i = 0; i < titles.size(); i++) {
+                String title = titlesIterator.next().text();
+                String model = title
                         .replaceAll("\\d+GB.*", "")
                         .replace("Смартфон ", "")
-                        .replace(phone.getBrand() + " ", "");
-
-                phone.setModel(model);
-
+                        .replace(findBrand(title) + " ", "");
                 Pattern pattern = Pattern.compile("\\b(\\d+)GB\\b");
-                Matcher matcher = pattern.matcher(name);
+                Matcher matcher = pattern.matcher(title);
+                int memory = 0;
                 while (matcher.find()) {
                     String digit = matcher.group(1);
-                    phone.setMemory(Integer.parseInt(digit));
+                    memory = Integer.parseInt(digit);
                 }
-
                 int price = Integer.parseInt(pricesIterator.next().text().replace(" ", ""));
-                phone.setPrice(price);
-
-                phone.setInStock(inStocksIterator.next().text().contains("Есть самовывозом, сегодня"));
+                boolean inStock = inStocksIterator.next().text().contains("Есть самовывозом, сегодня");
+                Phone phone = Phone.builder()
+                        .brand(findBrand(title))
+                        .model(model)
+                        .memory(memory)
+                        .price(price)
+                        .inStock(inStock)
+                        .build();
                 data.add(phone);
             }
         }
-        Crawl crawl = new Crawl();
-        crawl.setDate(Instant.now());
-        crawl.setPhones(data);
+        Crawl crawl = Crawl.builder()
+                .date(Instant.now())
+                .phones(data)
+                .build();
         crawlRepository.save(crawl);
         return crawl;
     }
