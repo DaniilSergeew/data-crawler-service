@@ -1,6 +1,7 @@
 /Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/DataCrawlerServiceApplication.java
 /Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/controller/CrawlerController.java
 /Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/model/Brand.java
+/Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/exception/ErrorHandlingControllerAdvice.java
 /Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/model/Report.java
 /Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/repository/CrawlRepository.java
 /Users/daniilsergeev/IdeaProjects/data-crawler-service/src/main/java/com/example/datacrawlerservice/service/CrawlerService.java

@@ -1,4 +1,4 @@
-com/example/datacrawlerservice/repository/CrawlRepository.class
 com/example/datacrawlerservice/repository/ReportRepository.class
+com/example/datacrawlerservice/repository/CrawlRepository.class
 com/example/datacrawlerservice/model/Brand.class
 com/example/datacrawlerservice/model/Crawl.class
