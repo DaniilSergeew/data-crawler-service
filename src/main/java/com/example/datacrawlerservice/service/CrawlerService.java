@@ -48,12 +48,13 @@ public class CrawlerService {
     }
 
     private Crawl getCrawl() {
-        List<Phone> data = new ArrayList<>();
+        List<Phone> phones = new ArrayList<>();
         for (int page = 1; page < 12; page++) {
             // Достаем HTML с каждой страницы сайта
-            Document document = null;
+            String url = "https://spb.shop.megafon.ru/mobile?page=" + page + "&archVal=0";
+            Document document;
             try {
-                document = Jsoup.connect("https://spb.shop.megafon.ru/mobile?page=" + page + "&archVal=0").get();
+                document = Jsoup.connect(url).get();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -91,12 +92,12 @@ public class CrawlerService {
                         .price(price)
                         .inStock(inStock)
                         .build();
-                data.add(phone);
+                phones.add(phone);
             }
         }
         Crawl crawl = Crawl.builder()
                 .date(Instant.now())
-                .phones(data)
+                .phones(phones)
                 .build();
         crawlRepository.save(crawl);
         return crawl;
