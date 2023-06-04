@@ -51,19 +51,17 @@ public class CrawlerService {
         List<Phone> phones = new ArrayList<>();
         for (int page = 1; page < 12; page++) {
             // Достаем HTML с каждой страницы сайта
-            String url = "https://spb.shop.megafon.ru/mobile?page=" + page + "&archVal=0";
             Document document;
             try {
+                String url = "https://spb.shop.megafon.ru/mobile?page=" + page + "&archVal=0";
                 document = Jsoup.connect(url).get();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            // Вытаскиваем нужные блоки по классам
+            // Вытаскиваем нужные блоки и итерируемся по ним
             Elements titles = document.getElementsByClass("b-good__title-link");
             Elements prices = document.getElementsByClass("b-price-good-list__value b-price__value");
             Elements inStocks = document.getElementsByClass("b-good-cards__status-item pickup ");
-
-            // Для каждого блока создаем итератор и идем сразу тремя итераторами, создавая объекты
             Iterator<Element> titlesIterator = titles.iterator();
             Iterator<Element> pricesIterator = prices.iterator();
             Iterator<Element> inStocksIterator = inStocks.iterator();
