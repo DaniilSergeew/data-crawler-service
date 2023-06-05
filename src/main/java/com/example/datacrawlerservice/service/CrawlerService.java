@@ -32,19 +32,20 @@ public class CrawlerService {
 
     public Report handleGetReportRequest() {
         Crawl crawl = getCrawl();
-        return getReport(crawl);
+        crawlRepository.save(crawl);
+        Report report = getReport(crawl);
+        reportRepository.save(report);
+        return report;
     }
 
     private Report getReport(Crawl crawl) {
         List<Phone> phones = crawl.getPhones();
-        Report report = Report.builder()
+        return Report.builder()
                 .averagePrice((int) phones.stream().mapToInt(Phone::getPrice).average().orElse(0))
                 .maxPrice(phones.stream().mapToInt(Phone::getPrice).max().orElse(0))
                 .minPrice(phones.stream().mapToInt(Phone::getPrice).min().orElse(0))
                 .inStockFactor((float) phones.stream().filter(Phone::isInStock).count() / phones.size())
                 .build();
-        reportRepository.save(report);
-        return report;
     }
 
     private Crawl getCrawl() {
@@ -97,12 +98,10 @@ public class CrawlerService {
                 phones.add(phone);
             }
         }
-        Crawl crawl = Crawl.builder()
+        return Crawl.builder()
                 .date(Instant.now())
                 .phones(phones)
                 .build();
-        crawlRepository.save(crawl);
-        return crawl;
     }
 
     private Brand findBrand(String name) {
