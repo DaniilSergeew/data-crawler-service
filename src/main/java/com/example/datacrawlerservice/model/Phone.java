@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @Column(columnDefinition = "VARCHAR(30)")
     @Enumerated(EnumType.STRING)

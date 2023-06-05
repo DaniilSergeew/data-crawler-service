@@ -18,7 +18,7 @@ import java.util.List;
 public class Crawl {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @Column
     private Instant date;

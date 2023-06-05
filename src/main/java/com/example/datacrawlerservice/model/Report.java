@@ -17,19 +17,19 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    Integer id;
+    private Integer id;
 
     @Column
-    int averagePrice;
+    private int averagePrice;
 
     @Column
-    int minPrice;
+    private int minPrice;
 
     @Column
-    int maxPrice;
+    private int maxPrice;
 
     @Column
-    float inStockFactor;
+    private float inStockFactor;
 
     // and more some metrics
 }
