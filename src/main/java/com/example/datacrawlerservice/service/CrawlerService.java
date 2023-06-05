@@ -69,6 +69,10 @@ public class CrawlerService {
             for (int i = 0; i < titles.size(); i++) {
                 String title = titlesIterator.next().text();
                 Brand brand = findBrand(title);
+                /* Todo
+                 Для iphone на 1tb необходимы другие регулярки, их всего 1-2 в таблице, поэтому
+                 надеюсь в данном контексте их присутствие не принципиально
+                 */
                 String model = title
                         .replaceAll("\\d+GB.*", "")
                         .replace("Смартфон ", "")
